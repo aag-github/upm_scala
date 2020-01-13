@@ -1,3 +1,5 @@
+import java.io._
+
 def move_head_to_tail(list : List[Int])  : List[Int] =
   list match {
     case Nil => Nil
@@ -47,13 +49,26 @@ def heads_permutation(head_list : List[List[Int]], acc : List[List[Int]]) : List
 def permutation(list: List[Int]) : List[List[Int]] =
   heads_permutation(rotate_head(list), Nil)
 
-permutation(Nil)
-permutation(1::Nil)
-permutation(1::2::Nil)
-permutation(1::2::3::Nil)
-permutation(1::2::3::4::Nil)
-permutation(1::2::3::4::5::Nil)
-permutation(1::2::3::4::5::6::Nil)
+// empty file
+val file = "C:\\temp\\whatever.txt"
+(new PrintWriter(new FileWriter(file))).close()
+
+def print(list: List[List[Int]]) : List[List[Int]] = {
+  val writer = new PrintWriter(new FileWriter(file, true))
+  writer.println("----------------- Start")
+  for(l <- list){ l.foreach(x => writer.print(x + " ")); writer.println(""); }
+  writer.println("----------------- End")
+  writer.close()
+  list
+}
+
+print(permutation(Nil))
+print(permutation(1::Nil))
+print(permutation(1::2::Nil))
+print(permutation(1::2::3::Nil))
+print(permutation(1::2::3::4::Nil))
+print(permutation(1::2::3::4::5::Nil))
+print(permutation(1::2::3::4::5::6::Nil))
 
 permutation(1::Nil).length
 permutation(1::2::Nil).length
