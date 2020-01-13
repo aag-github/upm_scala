@@ -10,8 +10,7 @@ def shift(list : List[Int]) : List[List[Int]] = {
   def shift_next(list : List[Int], n : Int, acc : List[List[Int]]) : List[List[Int]] =
      n match {
        case 0 => acc
-       case _ => shift_next(move_head_to_tail(list), n - a
-         1, list :: acc )
+       case _ => shift_next(move_head_to_tail(list), n - 1, list :: acc )
      }
   shift_next(list, list.length, Nil)
 }
