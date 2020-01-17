@@ -23,8 +23,8 @@ class Result(dead : Int, injured : Int) {
 
     (secret, proposed) match {
       case (Nil, Nil) => (acc._1, calculateInjured(acc._2, acc._3, 0))
-      case (secret, proposed) => if (secret.head == proposed.head) calculateValues(secret.tail, proposed.tail, (acc._1 + 1, acc._2, acc._3))
-                                 else calculateValues(secret.tail, proposed.tail, (acc._1, secret.head :: acc._2, proposed.head :: acc._3))
+      case (secret, proposed) if (secret.head == proposed.head) => calculateValues(secret.tail, proposed.tail, (acc._1 + 1, acc._2, acc._3))
+      case (secret, proposed) => calculateValues(secret.tail, proposed.tail, (acc._1, secret.head :: acc._2, proposed.head :: acc._3))
     }
   }
 
