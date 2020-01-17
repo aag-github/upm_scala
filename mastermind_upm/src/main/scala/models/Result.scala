@@ -16,8 +16,8 @@ class Result(dead : Int, injured : Int) {
         case (Nil, _) => acc
         case (_, Nil) => acc
         case (secret, proposed) if secret.head == proposed.head => calculateInjured(secret.tail, proposed.tail, acc + 1)
-        case (secret, proposed) => if (secret.head < proposed.head) calculateInjured( secret.tail, proposed, acc)
-                                   else calculateInjured( secret, proposed.tail, acc)
+        case (secret, proposed) if (secret.head < proposed.head) => calculateInjured(secret.tail, proposed, acc)
+        case (secret, proposed) if (secret.head > proposed.head) => calculateInjured(secret, proposed.tail, acc)
       }
     }
 
