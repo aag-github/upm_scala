@@ -1,7 +1,8 @@
 package models
 
 object Combination {
-  val MAX_LEN = 6
+  val COLORS = List('R', 'G', 'B', 'Y', 'O', 'M')
+  val MAX_COLORS = COLORS.length
 }
 
 class Combination(list : List[Char]) {

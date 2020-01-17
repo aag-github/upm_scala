@@ -4,8 +4,6 @@ import views.{CombinationView, GameView, GestorIO}
 object Main {
   def main(args: Array[String]): Unit = {
     var game = new Game(Nil, new SecretCombination())
-    game = game.addedProposedCombination("AAAAAA".toList)
-    game = game.addedProposedCombination("BBBBBB".toList)
     do {
       GameView.write(game)
       game = game.addedProposedCombination(CombinationView.read().toList)

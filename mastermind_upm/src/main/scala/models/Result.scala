@@ -10,27 +10,30 @@ class Result(dead : Int, injured : Int) {
   def this(values :(Int, Int)) =
     this(values._1, values._2)
 
-  private def calculateValues(secret: List[Char], proposed: List[Char], acc : (Int, List[Char], List[Char])) : (Int, Int) = {
-    def calculateInjured(secret: List[Char], proposed: List[Char], acc : Int ) : Int = {
-      (secret.sorted, proposed.sorted) match {
-        case (Nil, _) || (_, Nil)  => acc
-        case (secret, proposed) if secret.head == proposed.head => calculateInjured(secret.tail, proposed.tail, acc + 1)
-        case (secret, proposed) if (secret.head < proposed.head) => calculateInjured(secret.tail, proposed, acc)
-        case (secret, proposed) if (secret.head > proposed.head) => calculateInjured(secret, proposed.tail, acc)
-      }
-    }
-
-    (secret, proposed) match {
-      case (Nil, Nil) => (acc._1, calculateInjured(acc._2, acc._3, 0))
-      case (secret, proposed) if (secret.head == proposed.head) => calculateValues(secret.tail, proposed.tail, (acc._1 + 1, acc._2, acc._3))
-      case (secret, proposed) => calculateValues(secret.tail, proposed.tail, (acc._1, secret.head :: acc._2, proposed.head :: acc._3))
+  private def calculateColorMatches(secret: List[Char], proposed: List[Char], acc : Int ) : Int = {
+    (secret.sorted, proposed.sorted) match {
+      case (Nil, _) => acc
+      case (_, Nil) => acc
+      case (secret, proposed) if (secret.head == proposed.head) => calculateColorMatches(secret.tail, proposed.tail, acc + 1)
+      case (secret, proposed) if (secret.head < proposed.head) => calculateColorMatches(secret.tail, proposed, acc)
+      case (secret, proposed) if (secret.head > proposed.head) => calculateColorMatches(secret, proposed.tail, acc)
     }
   }
 
+  private def calculateFullMatches(secret: List[Char], proposed: List[Char], acc : Int) : Int = {
+    (secret, proposed) match {
+      case (Nil, Nil) => acc
+      case (secret, proposed) => calculateFullMatches(secret.tail, proposed.tail, acc + (if (secret.head == proposed.head) 1 else 0))
+    }
+  }
+
+  private def calculated(fullMatches : Int, colorMatches : Int) : Result =
+    new Result(fullMatches, colorMatches - fullMatches)
+
   def calculated(proposedCombination : List[Char], secretCombination : List[Char]) : Result = {
-    new Result(calculateValues(secretCombination, proposedCombination, (0, Nil, Nil)))
+    calculated(calculateFullMatches(secretCombination, proposedCombination, 0), calculateColorMatches(secretCombination, proposedCombination, 0))
   }
 
   def win() =
-    dead_ == Combination.MAX_LEN && injured_ == 0
+    dead_ == Combination.MAX_COLORS && injured_ == 0
 }

@@ -4,8 +4,7 @@ object SecretCombination {
   val r = new scala.util.Random(System.currentTimeMillis().toInt)
 
   def getRandomCombination() : List[Char] = {
-    val colors = List('R', 'G', 'B', 'Y', 'O', 'M')
-    (1 to Combination.MAX_LEN).map(_ => colors(r.nextInt(colors.length))).toList
+    (1 to Combination.MAX_COLORS).map(_ => Combination.COLORS(r.nextInt(Combination.MAX_COLORS))).toList
   }
 }
 
