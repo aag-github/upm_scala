@@ -13,8 +13,7 @@ class Result(dead : Int, injured : Int) {
   private def calculateValues(secret: List[Char], proposed: List[Char], acc : (Int, List[Char], List[Char])) : (Int, Int) = {
     def calculateInjured(secret: List[Char], proposed: List[Char], acc : Int ) : Int = {
       (secret.sorted, proposed.sorted) match {
-        case (Nil, _) => acc
-        case (_, Nil) => acc
+        case (Nil, _) || (_, Nil)  => acc
         case (secret, proposed) if secret.head == proposed.head => calculateInjured(secret.tail, proposed.tail, acc + 1)
         case (secret, proposed) if (secret.head < proposed.head) => calculateInjured(secret.tail, proposed, acc)
         case (secret, proposed) if (secret.head > proposed.head) => calculateInjured(secret, proposed.tail, acc)
