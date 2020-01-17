@@ -1,9 +1,9 @@
 package models
 
+object Combination {
+  val MAX_LEN = 6
+}
+
 class Combination(list : List[Char]) {
   val list_ = list
-  val MAX_LEN : Int = 6
-  def this() {
-    this(Nil)
-  }
 }

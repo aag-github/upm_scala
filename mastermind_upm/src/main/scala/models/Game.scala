@@ -1,17 +1,25 @@
 package models
 
+object Game {
+  val MAX_COMBINATIONS = 10
+}
+
 class Game(combinations : List[ProposedCombination], secretCombination : SecretCombination) {
+  def this() =
+    this(Nil, new SecretCombination())
+
   val combinations_ = combinations
   val secretCombination_ = secretCombination
-
-  private val MAX_COMBINATIONS = 10
 
   def addedProposedCombination(list : List[Char]) : Game =
     new Game(new ProposedCombination(list, new Result().calculated(secretCombination.list_, list)) :: combinations_, secretCombination)
 
-  def finished : Boolean =
-    combinations_.length == MAX_COMBINATIONS;
+  def attemptsLeft : Int =
+    Game.MAX_COMBINATIONS - combinations_.length;
 
   def win : Boolean =
-    combinations != Nil && combinations.head.list_.equals(secretCombination_.list_)
+    combinations != Nil && combinations.head.result_.win()
+
+  def finished : Boolean =
+    attemptsLeft == 0 || win
 }

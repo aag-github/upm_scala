@@ -31,4 +31,7 @@ class Result(dead : Int, injured : Int) {
   def calculated(proposedCombination : List[Char], secretCombination : List[Char]) : Result = {
     new Result(calculateValues(secretCombination, proposedCombination, (0, Nil, Nil)))
   }
+
+  def win() =
+    dead_ == Combination.MAX_LEN && injured_ == 0
 }
