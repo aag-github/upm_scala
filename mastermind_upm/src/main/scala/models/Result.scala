@@ -19,8 +19,11 @@ object Result {
   private def calculated(fullMatches : Int, colorMatches : Int) : Result =
     new Result(fullMatches, colorMatches - fullMatches)
 
-  def calculate(proposedCombination : List[Char], secretCombination : List[Char]) : Result =
+  def calculate(secretCombination : List[Char], proposedCombination : List[Char]) : Result = {
+    require(proposedCombination.length == secretCombination.length)
+    require(proposedCombination.length == Combination.LENGTH)
     calculated(calculateFullMatches(secretCombination, proposedCombination, 0), calculateColorMatches(secretCombination, proposedCombination, 0))
+  }
 }
 
 class Result(dead : Int, injured : Int) {
@@ -31,5 +34,5 @@ class Result(dead : Int, injured : Int) {
     this(values._1, values._2)
 
   def win() =
-    dead_ == Combination.MAX_COLORS && injured_ == 0
+    dead_ == Combination.LENGTH && injured_ == 0
 }
