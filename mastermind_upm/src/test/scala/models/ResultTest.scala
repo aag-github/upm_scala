@@ -26,4 +26,27 @@ class ResultTest extends FunSuite {
     assert(result.injured_ == 0)
   }
 
+  test("precondition length") {
+    try {
+      val colors = "RGBYY".toList // wrong length
+      Result.calculate(colors, colors)
+      assert(false)
+    }
+    catch {
+      case _: IllegalArgumentException => // Expected, so continue
+    }
+  }
+
+  test("precondition same length") {
+    try {
+      val colors1 = "RGBYY".toList // length mismatch
+      val colors2 = "RGBYYY".toList
+      Result.calculate(colors1, colors2)
+      assert(false)
+    }
+    catch {
+      case _: IllegalArgumentException => // Expected, so continue
+    }
+  }
+
 }
