@@ -12,5 +12,5 @@ object CombinationView {
   }
 
   def read() : String =
-    GestorIO.readString("Introduce una combinación\n")
+    GestorIO.readString(s"Enter a sequence of ${Combination.LENGTH} colors.\nValid characters ${Combination.COLORS_STRING}\n")
 }

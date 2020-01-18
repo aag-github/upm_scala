@@ -12,7 +12,7 @@ class Game(combinations : List[ProposedCombination], secretCombination : SecretC
   val secretCombination_ = secretCombination
 
   def addedProposedCombination(list : List[Char]) : Game =
-    new Game(new ProposedCombination(list, new Result().calculated(secretCombination.list_, list)) :: combinations_, secretCombination)
+    new Game(new ProposedCombination(list, Result.calculate(secretCombination.list_, list)) :: combinations_, secretCombination)
 
   def attemptsLeft : Int =
     Game.MAX_COMBINATIONS - combinations_.length;

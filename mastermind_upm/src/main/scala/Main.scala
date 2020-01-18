@@ -8,7 +8,7 @@ object Main {
       GameView.write(game)
       game = game.addedProposedCombination(CombinationView.read().toList)
     } while (!game.finished)
-    if (game.win) GestorIO.writeln("Has ganado")
-    else CombinationView.write(game.secretCombination_, "Has perdido. Solución: ")
+    if (game.win) GestorIO.writeln("You win.")
+    else CombinationView.write(game.secretCombination_, "You lose. Solution: ")
   }
 }

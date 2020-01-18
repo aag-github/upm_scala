@@ -1,15 +1,6 @@
 package models
 
-class Result(dead : Int, injured : Int) {
-  val dead_ : Int = dead
-  val injured_ : Int = injured
-
-  def this() =
-    this(0, 0)
-
-  def this(values :(Int, Int)) =
-    this(values._1, values._2)
-
+object Result {
   private def calculateColorMatches(secret: List[Char], proposed: List[Char], acc : Int ) : Int =
     (secret.sorted, proposed.sorted) match {
       case (Nil, _) => acc
@@ -28,8 +19,16 @@ class Result(dead : Int, injured : Int) {
   private def calculated(fullMatches : Int, colorMatches : Int) : Result =
     new Result(fullMatches, colorMatches - fullMatches)
 
-  def calculated(proposedCombination : List[Char], secretCombination : List[Char]) : Result =
+  def calculate(proposedCombination : List[Char], secretCombination : List[Char]) : Result =
     calculated(calculateFullMatches(secretCombination, proposedCombination, 0), calculateColorMatches(secretCombination, proposedCombination, 0))
+}
+
+class Result(dead : Int, injured : Int) {
+  val dead_ : Int = dead
+  val injured_ : Int = injured
+
+  def this(values :(Int, Int)) =
+    this(values._1, values._2)
 
   def win() =
     dead_ == Combination.MAX_COLORS && injured_ == 0

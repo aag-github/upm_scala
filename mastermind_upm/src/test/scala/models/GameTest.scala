@@ -3,58 +3,6 @@ package models
 import org.scalatest.FunSuite
 
 class GameTest extends FunSuite {
-  test("not win on empty game") {
-    val game = new Game(Nil, new SecretCombination(List('R','G','B')))
-
-    assert(game.attemptsLeft == 10)
-    assert(game.finished == false)
-    assert(game.win == false)
-  }
-
-  test("not win on not empty game") {
-    val game = new Game(Nil, new SecretCombination(List('R','G','B')))
-    val gameToTest = game.addedProposedCombination(List('R','G','H'))
-
-    assert(gameToTest.attemptsLeft == 9)
-    assert(gameToTest.finished == false)
-    assert(gameToTest.win == false)
-  }
-
-  test("win") {
-    val game = new Game(Nil, new SecretCombination("RGBRGB".toList))
-    val gameToTest = game.addedProposedCombination("RGBRGB".toList)
-
-    assert(gameToTest.attemptsLeft == 9)
-    assert(gameToTest.finished == true)
-    assert(gameToTest.win == true)
-  }
-
-  test("not finished") {
-    val game = new Game(Nil, new SecretCombination(List('R', 'G', 'B')))
-
-    assert(game.attemptsLeft == 10)
-    assert(game.finished == false)
-    assert(game.win == false)
-  }
-
-  test("finished") {
-    val game = new Game(Nil, new SecretCombination(List('R','G','B')))
-    val gameToTest = game.addedProposedCombination(List('R','G','B'))
-          .addedProposedCombination(List('R','G','B'))
-          .addedProposedCombination(List('R','G','B'))
-          .addedProposedCombination(List('R','G','B'))
-          .addedProposedCombination(List('R','G','B'))
-          .addedProposedCombination(List('R','G','B'))
-          .addedProposedCombination(List('R','G','B'))
-          .addedProposedCombination(List('R','G','B'))
-          .addedProposedCombination(List('R','G','B'))
-          .addedProposedCombination(List('R','H','G'))
-
-    assert(gameToTest.attemptsLeft == 0)
-    assert(gameToTest.finished == true)
-    assert(gameToTest.win == false)
-  }
-
   def iterateGame(game : Game, proposedCombinations : List[List[Char]]) : Game = {
     if (proposedCombinations != Nil) assert(!game.win && game.attemptsLeft > 0)
     proposedCombinations match {
@@ -63,7 +11,36 @@ class GameTest extends FunSuite {
     }
   }
 
-  test("full game win") {
+  test("not win on empty game") {
+    val game = new Game(Nil, new SecretCombination("RGBRGB".toList))
+
+    assert(game.attemptsLeft == 10)
+    assert(game.finished == false)
+    assert(game.win == false)
+  }
+
+  test("not win on not empty game") {
+    val game = new Game(Nil, new SecretCombination("RGBRGB".toList))
+    val gameToTest = game.addedProposedCombination("RGBRGH".toList)
+
+    assert(gameToTest.attemptsLeft == 9)
+    assert(gameToTest.finished == false)
+    assert(gameToTest.win == false)
+  }
+
+  test("finished not win") {
+    val combinations = (1 to 10).map(_ => "RGBRGC".toList).toList
+    val game = new Game(Nil, new SecretCombination("RGBRGB".toList))
+
+    val gameToTest = iterateGame(game, combinations)
+
+    assert(gameToTest.attemptsLeft == 0)
+    assert(gameToTest.finished == true)
+    assert(gameToTest.win == false)
+  }
+
+
+  test("finished win") {
     val combinations = List("RGBRGC".toList, "RGBRGC".toList, "RGBRGB".toList)
     val game = new Game(Nil, new SecretCombination("RGBRGB".toList))
 
