@@ -1,7 +1,7 @@
 package models
 
 object Game {
-  val MAX_COMBINATIONS = 10
+  val MAX_COMBINATIONS = 15
 }
 
 class Game(combinations : List[ProposedCombination], secretCombination : SecretCombination) {
