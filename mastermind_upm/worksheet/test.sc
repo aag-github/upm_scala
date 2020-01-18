@@ -1,3 +1,4 @@
+import models.Combination
 
 def getInjured(secret: List[Char], proposed: List[Char], acc : Int ) : Int = {
   (secret.sorted, proposed.sorted) match {
@@ -24,3 +25,16 @@ getInjured(List('R', 'G', 'G', 'B'), List('O', 'P', 'G'), 0)
 
 List('A', 'B').equals(List('A', 'B'))
 List('A', 'B').equals(List('A', 'C'))
+
+
+val ll1 = List(true, false, false)
+ll1.fold(true)(_&&_)
+val ll2 = List(true, true, true)
+ll2.fold(true)(_&&_)
+
+Combination.COLORS_LIST.contains('d')
+
+"RGBa".toList.map(Combination.COLORS_LIST.contains(_) )
+"RGBa".toList.map(Combination.COLORS_LIST.contains(_) ).fold(true)(_&&_)
+"RGBY".toList.map(Combination.COLORS_LIST.contains(_) ).fold(true)(_&&_)
+
