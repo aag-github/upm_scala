@@ -8,7 +8,7 @@ object ProposedCombinationsView {
       combinations match {
         case Nil => acc.tail + "\n-----------"
         case head :: tail => {
-          val combinationString = "\n" + CombinationView.toString(head, combinations.length + " - ")
+          val combinationString = "\n" + CombinationViewWriter.toString(head, combinations.length + " - ")
           val proposedCombinationString = ResultView.toString(head.result_, combinationString)
           build(tail, count - 1, proposedCombinationString + acc)
         }

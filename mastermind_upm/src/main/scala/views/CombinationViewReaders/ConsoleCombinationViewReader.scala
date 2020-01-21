@@ -1,14 +1,8 @@
-package views
-
+package views.CombinationViewReaders
+import views.{CombinationViewReader, GestorIO}
 import models.Combination
 
-object CombinationView {
-  def write(combination: Combination, prefix: String) =
-    GestorIO.writeln(toString(combination, prefix))
-
-  def toString(combination: Combination, prefix: String) =
-    prefix + combination.list_.fold("")(_.toString + _.toString)
-
+object ConsoleCombinationViewReader extends CombinationViewReader{
   private def validateString(requestString:() => String, message :String = "") : String = {
     if (message != "") GestorIO.writeln(message)
     requestString() match {
@@ -17,7 +11,6 @@ object CombinationView {
       case a => a
     }
   }
-
-  def read() : String =
+  override def read() : String =
     validateString(() => GestorIO.readString(s"Enter a sequence of ${Combination.LENGTH} colors.\nValid characters: ${Combination.COLORS_STRING}\n"))
 }

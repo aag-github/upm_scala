@@ -7,6 +7,10 @@ object GestorIO {
     scala.io.StdIn.readLine()
   }
 
+  def readInt(title:String):Int = {
+    readString(title).toInt
+  }
+
   def writeln(string:String):Unit =
     println(string)
 
