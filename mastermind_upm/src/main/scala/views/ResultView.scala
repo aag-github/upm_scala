@@ -1,6 +1,7 @@
 package views
 
 import models.Result
+import views.io.GestorIO
 
 object ResultView {
   def toString(result : Result, prefix: String) : String =

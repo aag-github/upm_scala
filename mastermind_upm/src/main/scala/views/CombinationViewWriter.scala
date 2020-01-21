@@ -1,6 +1,7 @@
 package views
 
 import models.Combination
+import views.io.GestorIO
 
 object CombinationViewWriter {
   def write(combination: Combination, prefix: String) =

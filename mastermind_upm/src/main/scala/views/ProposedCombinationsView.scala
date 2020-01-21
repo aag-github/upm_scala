@@ -1,6 +1,7 @@
 package views
 
 import models.ProposedCombination
+import views.io.GestorIO
 
 object ProposedCombinationsView {
   def write(combinations: List[ProposedCombination]) = {

@@ -1,7 +1,7 @@
 package views.CombinationViewReaders
 
 import models.{SecretCombination}
-import views.{CombinationViewReader, GestorIO}
+import views.CombinationViewReader
 
 object RandomCombinationViewReader extends CombinationViewReader {
   override def read() : String = {

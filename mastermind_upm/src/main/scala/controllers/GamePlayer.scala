@@ -1,7 +1,8 @@
 package controllers
 
 import models.{Game, SecretCombination}
-import views.{CombinationViewWriter, CombinationViewReader, GameView, GestorIO}
+import views.io.GestorIO
+import views.{CombinationViewReader, CombinationViewWriter, GameView}
 
 object GamePlayer {
   def play(reader: CombinationViewReader) = {

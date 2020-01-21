@@ -1,6 +1,7 @@
 package views
 
 import models.Game
+import views.io.GestorIO
 
 object GameView {
   def write(game:Game) = {

@@ -1,6 +1,7 @@
 package views.CombinationViewReaders
-import views.{CombinationViewReader, GestorIO}
+import views.CombinationViewReader
 import models.Combination
+import views.io.GestorIO
 
 object ConsoleCombinationViewReader extends CombinationViewReader{
   private def validateString(requestString:() => String, message :String = "") : String = {
