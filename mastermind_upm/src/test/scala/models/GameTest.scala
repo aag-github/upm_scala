@@ -12,7 +12,7 @@ class GameTest extends FunSuite {
   }
 
   test("not win on empty game") {
-    val game = new Game(Nil, new SecretCombination("RGBRGB".toList))
+    val game = new Game(Nil, new SecretCombination("RGBR".toList))
 
     assert(game.attemptsLeft == 10)
     assert(game.finished == false)
@@ -20,8 +20,8 @@ class GameTest extends FunSuite {
   }
 
   test("not win on not empty game") {
-    val game = new Game(Nil, new SecretCombination("RGBRGB".toList))
-    val gameToTest = game.addedProposedCombination("RGBRGH".toList)
+    val game = new Game(Nil, new SecretCombination("RGBR".toList))
+    val gameToTest = game.addedProposedCombination("RGBG".toList)
 
     assert(gameToTest.attemptsLeft == 9)
     assert(gameToTest.finished == false)
@@ -29,8 +29,8 @@ class GameTest extends FunSuite {
   }
 
   test("finished not win") {
-    val combinations = (1 to 10).map(_ => "RGBRGC".toList).toList
-    val game = new Game(Nil, new SecretCombination("RGBRGB".toList))
+    val combinations = (1 to 10).map(_ => "RGBB".toList).toList
+    val game = new Game(Nil, new SecretCombination("RGBR".toList))
 
     val gameToTest = iterateGame(game, combinations)
 
@@ -41,8 +41,8 @@ class GameTest extends FunSuite {
 
 
   test("finished win") {
-    val combinations = List("RGBRGC".toList, "RGBRGC".toList, "RGBRGB".toList)
-    val game = new Game(Nil, new SecretCombination("RGBRGB".toList))
+    val combinations = List("RGBB".toList, "RGBB".toList, "RGBR".toList)
+    val game = new Game(Nil, new SecretCombination("RGBR".toList))
 
     val lastGame = iterateGame(game, combinations)
 
