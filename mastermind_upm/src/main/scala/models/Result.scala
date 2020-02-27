@@ -16,13 +16,13 @@ object Result {
       case (secret, proposed) => calculateFullMatches(secret.tail, proposed.tail, acc + (if (secret.head == proposed.head) 1 else 0))
     }
 
-  private def calculated(fullMatches : Int, colorMatches : Int) : Result =
+  private def getResult(fullMatches : Int, colorMatches : Int) : Result =
     new Result(fullMatches, colorMatches - fullMatches)
 
   def calculate(secretCombination : List[Char], proposedCombination : List[Char]) : Result = {
     require(proposedCombination.length == secretCombination.length)
     require(proposedCombination.length == Combination.LENGTH)
-    calculated(calculateFullMatches(secretCombination, proposedCombination, 0), calculateColorMatches(secretCombination, proposedCombination, 0))
+    getResult(calculateFullMatches(secretCombination, proposedCombination, 0), calculateColorMatches(secretCombination, proposedCombination, 0))
   }
 }
 
